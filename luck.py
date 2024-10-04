@@ -12,19 +12,23 @@ class Person:
         return self.luck * 0.1 + self.skill * 0.9
 
 
-persons = [Person() for _ in range(100000)]
-persons.sort(key=lambda x: x.worth(), reverse=True)
+def run_simulatioins():
+  persons = [Person() for _ in range(100000)]
+  persons.sort(key=lambda x: x.worth(), reverse=True)
+  
+  top_1_percent = persons[:1000]
+  luck_values = [person.luck for person in top_1_percent]
+  
+  # Calculate mean and standard deviation of luck values
+  luck_mean = np.mean(luck_values)
+  luck_std = np.std(luck_values)
+  
+  # Print mean and standard deviation
+  print(f"Luck Mean: {luck_mean:.2f}")
+  print(f"STD Luck: {luck_std:.2f}")
 
-top_1_percent = persons[:1000]
-luck_values = [person.luck for person in top_1_percent]
-
-# Calculate mean and standard deviation of luck values
-luck_mean = np.mean(luck_values)
-luck_std = np.std(luck_values)
-
-# Print mean and standard deviation
-print(f"Luck Mean: {luck_mean:.2f}")
-print(f"STD Luck: {luck_std:.2f}")
+for _ in range(10):
+    run_simulatioins()
 
 ## show but I am using fucking WSL so I can't
 # plt.plot(range(1, len(luck_values) + 1), luck_values)
